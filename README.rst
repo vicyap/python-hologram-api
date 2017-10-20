@@ -3,18 +3,18 @@ python-hologram-api
 ===================
 
 
-.. image:: https://img.shields.io/pypi/v/python_hologram_api.svg
-        :target: https://pypi.python.org/pypi/python_hologram_api
+.. image:: https://img.shields.io/pypi/v/python-hologram-api.svg
+        :target: https://pypi.python.org/pypi/python-hologram-api
 
-.. image:: https://img.shields.io/travis/vicyap/python_hologram_api.svg
-        :target: https://travis-ci.org/vicyap/python_hologram_api
+.. image:: https://img.shields.io/travis/vicyap/python-hologram-api.svg
+        :target: https://travis-ci.org/vicyap/python-hologram-api
 
 .. image:: https://readthedocs.org/projects/python-hologram-api/badge/?version=latest
         :target: https://python-hologram-api.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/vicyap/python_hologram_api/shield.svg
-     :target: https://pyup.io/repos/github/vicyap/python_hologram_api/
+.. image:: https://pyup.io/repos/github/vicyap/python-hologram-api/shield.svg
+     :target: https://pyup.io/repos/github/vicyap/python-hologram-api/
      :alt: Updates
 
 
