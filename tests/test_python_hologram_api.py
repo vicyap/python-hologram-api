@@ -3,23 +3,28 @@
 
 """Tests for `python_hologram_api` package."""
 
-import pytest
+import unittest
+
+import requests
+
+from python_hologram_api.client import HologramClient
+
+MOCK_SERVER_BASEURL = 'https://private-anon-0564af53ca-hologram.apiary-mock.com/api/1/'
 
 
-from python_hologram_api import python_hologram_api
+class TestDevices(unittest.TestCase):
+    def setUp(self):
+        self.client = HologramClient(None, base_url=MOCK_SERVER_BASEURL)
 
+    def tearDown(self):
+        pass
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
+    def test_000(self):
+        """Test list devices."""
+        devices = self.client.list_devices()
+        self.assertTrue(devices.get('success'))
 
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+    def test_001(self):
+        """Test get device."""
+        device = self.client.get_device(1234)
+        self.assertTrue(device.get('success'))
