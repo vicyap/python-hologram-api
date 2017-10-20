@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 """Main module."""
-
-import urlparse
+try:
+    # python 3
+    from urllib.parse import urljoin
+except ImportError:
+    # python 2
+    from urlparse import urljoin
 
 import requests
 
@@ -23,7 +27,7 @@ class HologramClient(object):
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urlparse.urljoin(self.base_url, 'devices')
+        url = urljoin(self.base_url, 'devices')
         params = {
             'apikey': self.api_key,
             'orgid': orgid,
@@ -40,7 +44,7 @@ class HologramClient(object):
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urlparse.urljoin(self.base_url, 'devices/{}'.format(deviceid))
+        url = urljoin(self.base_url, 'devices/{}'.format(deviceid))
         params = {
             'apikey': self.api_key,
         }
