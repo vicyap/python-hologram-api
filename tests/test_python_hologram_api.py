@@ -5,8 +5,6 @@
 
 import unittest
 
-import requests
-
 from python_hologram_api.client import HologramClient
 
 MOCK_SERVER_BASEURL = 'https://private-anon-0564af53ca-hologram.apiary-mock.com/api/1/'
@@ -14,7 +12,7 @@ MOCK_SERVER_BASEURL = 'https://private-anon-0564af53ca-hologram.apiary-mock.com/
 
 class TestHologramApi(unittest.TestCase):
     def setUp(self):
-        self.client = HologramClient(None, base_url=MOCK_SERVER_BASEURL)
+        self.client = HologramClient(api_key=None, base_url=MOCK_SERVER_BASEURL)
 
     def tearDown(self):
         pass
@@ -23,13 +21,13 @@ class TestHologramApi(unittest.TestCase):
 class TestDevices(TestHologramApi):
     def test_list_devices(self):
         """Test List Devices."""
-        # self.client.devices.list()
-        pass
+        resp = self.client.devices.list()
+        self.assertTrue(resp.get('success'))
 
     def test_get_device(self):
         """Test Get a Device."""
-        # self.client.devices.get()
-        pass
+        resp = self.client.devices.get(1234)
+        self.assertTrue(resp.get('success'))
 
 
 class TestCellularLinks(TestHologramApi):
