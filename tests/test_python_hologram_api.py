@@ -26,41 +26,57 @@ class TestDevices(TestHologramApi):
 
     def test_get_device(self):
         """Test Get a Device."""
-        resp = self.client.devices.get(1234)
+        deviceid = 1234
+        resp = self.client.devices.get(deviceid)
         self.assertTrue(resp.get('success'))
 
 
 class TestCellularLinks(TestHologramApi):
     def test_activate_sims(self):
         """Test Activate SIMs."""
-        # self.client.cell.activate_sims()
-        pass
+        sims = ['99990000000012345678']
+        plan = 73
+        tier = 1
+        resp = self.client.cell.activate_sims(sims, plan, tier)
+        self.assertTrue(resp.get('success'))
 
     def test_list_cellular_links(self):
         """Test List Cellular Links."""
-        # self.client.cell.list_links()
-        pass
+        resp = self.client.cell.list_links()
+        self.assertTrue(resp.get('success'))
 
     def test_get_cellular_link(self):
         """Test Get Cellular Link."""
-        # self.client.cell.get_links()
-        pass
+        linkid = 54321
+        resp = self.client.cell.get_link(linkid)
+        self.assertTrue(resp.get('success'))
 
     def test_change_plan(self):
         """Test Change Plan."""
-        # self.client.cell.change_plan()
-        pass
+        linkid = 54321
+        plan = 73
+        tier = 1
+        resp = self.client.cell.change_plan(linkid, plan, tier)
+        self.assertTrue(resp.get('success'))
 
     def test_change_overage_limit(self):
         """Test Change Overage Limit."""
-        # self.client.cell.change_overage_limit()
-        pass
+        linkid = 54321
+        limit = 20000
+        resp = self.client.cell.change_overage_limit(linkid, limit)
+        self.assertTrue(resp.get('success'))
 
-    def test_change_cellular_state(self):
-        """Test Pause or Unpause Data."""
-        # self.client.cell.pause()
-        # self.client.cell.unpause()
-        pass
+    def test_pause_data(self):
+        """Test Pause Data."""
+        linkid = 54321
+        resp = self.client.cell.pause_link(linkid)
+        self.assertTrue(resp.get('success'))
+
+    def test_unpause_data(self):
+        """Test Unpause Data."""
+        linkid = 54321
+        resp = self.client.cell.unpause_link(linkid)
+        self.assertTrue(resp.get('success'))
 
 
 class TestDeviceTags(TestHologramApi):
