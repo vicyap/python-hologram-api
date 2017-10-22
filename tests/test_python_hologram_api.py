@@ -82,137 +82,180 @@ class TestCellularLinks(TestHologramApi):
 class TestDeviceTags(TestHologramApi):
     def test_list_device_tags(self):
         """Test List Device Tags."""
-        # self.client.tag.list()
-        pass
+        resp = self.client.tags.list()
+        self.assertTrue(resp.get('success'))
 
     def test_create_device_tag(self):
         """Test Create Device Tag."""
-        # self.client.tag.create()
-        pass
+        name = "My Tag"
+        resp = self.client.tags.create(name)
+        self.assertTrue(resp.get('success'))
 
     def test_delete_device_tag(self):
         """Test Delete Device Tag."""
-        # self.client.tag.delete()
-        pass
+        tagid = 1234
+        resp = self.client.tags.delete(tagid)
+        self.assertTrue(resp.get('success'))
 
     def test_link_device_tag(self):
         """Test Link a Device to a Tag."""
-        # self.client.tag.link()
-        pass
+        tagid = 1234
+        device_ids = [4321]
+        resp = self.client.tags.link_devices(tagid, device_ids)
+        self.assertTrue(resp.get('success'))
 
     def test_unlink_device_tag(self):
         """Test Unlink a Device to a Tag."""
-        # self.client.tag.unlink()
-        pass
+        tagid = 1234
+        device_ids = [4321]
+        resp = self.client.tags.unlink_devices(tagid, device_ids)
+        self.assertTrue(resp.get('success'))
 
 
 class TestDataPlans(TestHologramApi):
     def test_list_data_plans(self):
         """Test List Data Plans."""
-        # self.client.data.list_plans()
-        pass
+        resp = self.client.data_plans.list()
+        self.assertTrue(resp.get('success'))
 
     def test_get_data_plan(self):
         """Test Get Data Plan."""
-        # self.client.data.get_plan()
-        pass
+        planid = 127
+        resp = self.client.data_plans.get(planid)
+        self.assertTrue(resp.get('success'))
 
 
-class TestHologramCloud(TestHologramApi):
+class TestCSRMessaging(TestHologramApi):
     def test_send_csr_message(self):
         """Test Send CSR Message."""
-        # self.client.csr.send_message()
-        pass
+        deviceid = 54321
+        data = 'Hello, Hologram!'
+        resp = self.client.csr.send_message(deviceid, data)
+        self.assertTrue(resp.get('success'))
 
+    @unittest.skip('no json could be decoded')
     def test_list_csr_messages(self):
         """Test List CSR Messages."""
-        # self.client.csr.list_messages()
-        pass
+        deviceid = 54321
+        limit = 100
+        orgid = 3222
+        topicname = '_RESTAPI_'
+        timestampstart = 1480550400
+        timestampend = 1480550400
+        resp = self.client.csr.list_messages(
+            deviceid=deviceid,
+            limit=limit,
+            orgid=orgid,
+            topicname=topicname,
+            timestampstart=timestampstart,
+            timestampend=timestampend)
+        self.assertTrue(resp.get('success'))
 
+
+class TestSMSMessaging(TestHologramApi):
     def test_send_sms_message(self):
         """Test Send SMS Message."""
-        # self.client.sms.send_message()
-        pass
+        deviceid = 1234
+        body = 'Hello world!'
+        resp = self.client.sms.send_message(deviceid, body)
+        self.assertTrue(resp.get('success'))
 
 
 class TestCloudToDeviceMessaging(TestHologramApi):
     def test_send_message_to_device(self):
         """Test Send Message to Device."""
-        # self.client.cloud.send_message()
-        pass
+        deviceids = [1234, 1236]
+        protocol = 'TCP'
+        port = 80
+        data = 'Hello world!'
+        resp = self.client.cloud.send_message(deviceids, protocol, port, data=data)
+        self.assertTrue(resp.get('success'))
 
     def test_send_message_to_device_webhook(self):
         """Test Send Message to Device via Webhook."""
-        # self.client.cloud.trigger_webhook()
-        pass
+        deviceid = 12345
+        webhookguid = 'f56839c23a801251af8bf8c820f28a1f'
+        data = 'Hello world!'
+        resp = self.client.cloud.trigger_webhook(deviceid, webhookguid, data=data)
+        self.assertEqual(200, resp)
 
 
 class TestSpacebridge(TestHologramApi):
     def test_add_public_key(self):
         """Test Add Public Key."""
-        # self.client.spacebridge.add_key()
-        pass
+        public_key = 'ssh-rsa AAAAB3Nzaasdf... user@example.com'
+        resp = self.client.spacebridge.add_public_key(public_key)
+        self.assertTrue(resp.get('success'))
 
     def test_list_public_keys(self):
         """Test List Public Keys."""
-        # self.client.spacebridge.list_keys()
-        pass
+        resp = self.client.spacebridge.list_public_keys()
+        self.assertTrue(resp.get('success'))
 
     def test_disable_key(self):
         """Test Disable a Key."""
-        # self.client.spacebridge.disable_key()
-        pass
+        tunnel_key_id = 1234
+        resp = self.client.spacebridge.disable_key(tunnel_key_id)
+        self.assertTrue(resp.get('success'))
 
     def test_enable_key(self):
         """Test Enable a Key."""
-        # self.client.spacebridge.enable_key()
-        pass
+        tunnel_key_id = 1234
+        resp = self.client.spacebridge.enable_key(tunnel_key_id)
+        self.assertTrue(resp.get('success'))
 
 
-class TestAccountManagement(TestHologramApi):
+class TestUserManagement(TestHologramApi):
     def test_current_user(self):
         """Test Get User Info."""
-        # self.client.user.get_info()
-        pass
+        resp = self.client.user.get_info()
+        self.assertTrue(resp.get('success'))
 
     def test_user_balance(self):
         """Test User Balance."""
-        # self.client.user.get_balance()
-        pass
+        resp = self.client.user.get_balance()
+        self.assertTrue(resp.get('success'))
 
     def test_user_add_balance(self):
         """Test Add Balance."""
-        # self.client.user.add_balance()
-        pass
+        amount = 123.5
+        resp = self.client.user.add_balance(amount)
+        self.assertTrue(resp.get('success'))
 
+    @unittest.skip('There is a bug in the response json')
     def test_user_balance_history(self):
         """Test Balance History."""
-        # self.client.user.balance_history()
-        pass
+        resp = self.client.user.balance_history()
+        self.assertTrue(resp.get('success'))
 
 
-class TestOrganizations(TestHologramApi):
+class TestOrganizationManagement(TestHologramApi):
     def test_list_organizations(self):
         """Test List Organizations."""
-        # self.client.org.list_orgs()
-        pass
+        self.client.org.list()
+        self.assertTrue(resp.get('success'))
 
     def test_get_organization(self):
         """Test Get Organization."""
-        # self.client.org.get_org()
-        pass
+        org_id = 4321
+        resp = self.client.org.get(org_id)
+        self.assertTrue(resp.get('success'))
 
     def test_org_balance(self):
         """Test Organization Balance."""
-        # self.client.org.get_balance()
-        pass
+        org_id = 2345
+        resp = self.client.org.get_balance(org_id)
+        self.assertTrue(resp.get('success'))
 
     def test_org_add_balance(self):
         """Test Organization Add Balance."""
-        # self.client.org.add_balance()
-        pass
+        org_id = 54345
+        amount = 123.5
+        resp = self.client.org.add_balance(org_id, amount)
+        self.assertTrue(resp.get('success'))
 
+    @unittest.skip('There is a bug in the response json')
     def test_org_balance_history(self):
         """Test Organization Balance History."""
-        # self.client.org.balance_history()
-        pass
+        org_id = 54345
+        resp = self.client.org.balance_history(org_id)
