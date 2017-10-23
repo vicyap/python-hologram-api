@@ -233,7 +233,7 @@ class TestOrganizationManagement(TestHologramApi):
     @unittest.skip('There is no response from the mock server')
     def test_list_organizations(self):
         """Test List Organizations."""
-        self.client.org.list()
+        resp = self.client.org.list()
         self.assertTrue(resp.get('success'))
 
     @unittest.skip('There is no response from the mock server')
@@ -261,3 +261,4 @@ class TestOrganizationManagement(TestHologramApi):
         """Test Organization Balance History."""
         org_id = 54345
         resp = self.client.org.balance_history(org_id)
+        self.assertTrue(resp.get('success'))

@@ -35,7 +35,8 @@ class CSRMessaging(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def list_messages(self,
+    def list_messages(
+            self,
             device_id=None,
             limit=None,
             org_id=None,
@@ -113,12 +114,14 @@ class CloudToDeviceMessaging(object):
     def send_message(self, device_ids, protocol, port, data=None, base64_data=None):
         """Send a Message to a List of Devices.
 
+        Must send either data or base64data.
+
         Args:
             device_ids (List[int]): IDs of devices to send message.
             protocol (str): The protocol to use: 'TCP' or 'UDP'.
             port (int): The port to use.
-            data (str): The data to send. Max length of 10k bytes. Must send either data or base64data.
-            base64_data (str): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
+            data (str): The data to send. Max length of 10k bytes.
+            base64_data (str): The data to send, encoded in base64. Max length of 10k bytes.
 
         Returns:
             dict: the json response as a dictionary.
@@ -144,11 +147,13 @@ class CloudToDeviceMessaging(object):
         webhook GUID serves as an authentication token. In order to generate a
         webhook URL, please visit the cloud configuration page for your device.
 
+        Must send either data or base64data.
+
         Args:
             device_id (int): ID of the device to send to.
             webhook_guid (str): generated UUID for the webhook URL.
-            data (str, optional): The data to send. Max length of 10k bytes. Must send either data or base64data.
-            base64_data (str, optional): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
+            data (str, optional): The data to send. Max length of 10k bytes.
+            base64_data (str, optional): The data to send, encoded in base64. Max length of 10k bytes.
 
         Returns:
             int: Integer Code of responded HTTP Status, e.g. 404 or 200.

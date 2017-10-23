@@ -34,7 +34,6 @@ class Organization(object):
         resp = requests.get(url, json=params)
         return resp.json()
 
-
     def get(self, org_id):
         """Get an Organization.
 
