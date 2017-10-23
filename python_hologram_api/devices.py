@@ -14,11 +14,11 @@ class Devices(object):
         """Save a reference to the client."""
         self.client = client
 
-    def list(self, orgid=None):
+    def list(self, org_id=None):
         """List Devices.
 
         Args:
-            orgid (int, optional): Only return results for the given organization ID.
+            org_id (int, optional): Only return results for the given organization ID.
 
         Returns:
             dict: the json response as a dictionary.
@@ -26,21 +26,21 @@ class Devices(object):
         url = urljoin(self.client.base_url, 'devices')
         params = {
             'apikey': self.client.api_key,
-            'orgid': orgid,
+            'orgid': org_id,
         }
         resp = requests.get(url, json=params)
         return resp.json()
 
-    def get(self, deviceid):
+    def get(self, device_id):
         """Get a Device.
 
         Args:
-            deviceid (int): device id.
+            device_id (int): The device id to get.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'devices/{}'.format(deviceid))
+        url = urljoin(self.client.base_url, 'devices/{}'.format(device_id))
         params = {
             'apikey': self.client.api_key,
         }

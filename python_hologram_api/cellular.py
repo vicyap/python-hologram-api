@@ -8,7 +8,11 @@ import requests
 
 
 class CellularLinks(object):
-    """CellularLinks class."""
+    """CellularLinks class.
+
+    A Cellular Link is the association between a Device and a cellular data
+    plan and SIM. Typically, a device has exactly one Cellular Link.
+    """
 
     def __init__(self, client):
         """Save a reference to the client."""
@@ -36,11 +40,11 @@ class CellularLinks(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def list_links(self, orgid=None):
+    def list_links(self, org_id=None):
         """List Cellular Links
 
         Args:
-            orgid (int, optional): Only return results for the given organization ID.
+            org_id (int, optional): Only return results for the given organization ID.
 
         Returns:
             dict: the json response as a dictionary.
@@ -48,32 +52,32 @@ class CellularLinks(object):
         url = urljoin(self.client.base_url, 'links/cellular')
         params = {
             'apikey': self.client.api_key,
-            'orgid': orgid
+            'orgid': org_id
         }
         resp = requests.get(url, json=params)
         return resp.json()
 
-    def get_link(self, linkid):
+    def get_link(self, link_id):
         """Get Cellular Link.
 
         Args:
-            linkid (int): Integer ID of the link to retrieve.
+            link_id (int): Integer ID of the link to retrieve.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'links/cellular/{}'.format(linkid))
+        url = urljoin(self.client.base_url, 'links/cellular/{}'.format(link_id))
         params = {
             'apikey': self.client.api_key
         }
         resp = requests.get(url, json=params)
         return resp.json()
 
-    def change_plan(self, linkid, plan, tier):
+    def change_plan(self, link_id, plan, tier):
         """Change Plan.
 
         Args:
-            linkid (int): Integer ID of the link to change.
+            link_id (int): Integer ID of the link to change.
             plan (int): Device data plan. Look up plan IDs with List Data Plans.
             tier (int): Geographic zone. Currently the valid tiers are 1 and 2.
                 Higher tiers incur higher costs. See pricing for details.
@@ -81,7 +85,7 @@ class CellularLinks(object):
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'links/cellular/{}/changeplan'.format(linkid))
+        url = urljoin(self.client.base_url, 'links/cellular/{}/changeplan'.format(link_id))
         params = {
             'apikey': self.client.api_key,
             'plan': plan,
@@ -90,17 +94,17 @@ class CellularLinks(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def change_overage_limit(self, linkid, limit):
+    def change_overage_limit(self, link_id, limit):
         """Change Overage Limit.
 
         Args:
-            linkid (int): Integer ID of the link to modify.
+            link_id (int): Integer ID of the link to modify.
             limit (int): Number of bytes over the plan limit to allow. Set -1 for no data limit.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'links/cellular/{}/overagelimit'.format(linkid))
+        url = urljoin(self.client.base_url, 'links/cellular/{}/overagelimit'.format(link_id))
         params = {
             'apikey': self.client.api_key,
             'limit': limit
@@ -108,16 +112,16 @@ class CellularLinks(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def pause_link(self, linkid):
+    def pause_link(self, link_id):
         """Pause Data.
 
         Args:
-            linkid (int): Integer ID of the link to modify.
+            link_id (int): Integer ID of the link to modify.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'links/cellular/{}/state'.format(linkid))
+        url = urljoin(self.client.base_url, 'links/cellular/{}/state'.format(link_id))
         params = {
             'apikey': self.client.api_key,
             'state': 'pause'
@@ -125,16 +129,16 @@ class CellularLinks(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def unpause_link(self, linkid):
+    def unpause_link(self, link_id):
         """Unpause Data.
 
         Args:
-            linkid (int): Integer ID of the link to modify.
+            link_id (int): Integer ID of the link to modify.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'links/cellular/{}/state'.format(linkid))
+        url = urljoin(self.client.base_url, 'links/cellular/{}/state'.format(link_id))
         params = {
             'apikey': self.client.api_key,
             'state': 'live'

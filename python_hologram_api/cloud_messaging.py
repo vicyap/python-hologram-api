@@ -14,11 +14,11 @@ class CSRMessaging(object):
         """Save a reference to the client."""
         self.client = client
 
-    def send_message(self, deviceid, data, tags=None):
+    def send_message(self, device_id, data, tags=None):
         """Send a CSR Message.
 
         Args:
-            deviceid (int): Device ID to associate the message to.
+            device_id (int): Device ID to associate the message to.
             data (str): Data payload of the message.
             tags (List[str], optional): Additional topics to associate with the message.
 
@@ -28,23 +28,29 @@ class CSRMessaging(object):
         url = urljoin(self.client.base_url, 'csr/rdm')
         params = {
             'apikey': self.client.api_key,
-            'deviceid': deviceid,
+            'deviceid': device_id,
             'data': data,
             'tags': tags
         }
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def list_messages(self, deviceid=None, limit=None, orgid=None, topicname=None, timestampstart=None, timestampend=None):
+    def list_messages(self,
+            device_id=None,
+            limit=None,
+            org_id=None,
+            topic_name=None,
+            time_stamp_start=None,
+            time_stamp_end=None):
         """List CSR Messages.
 
         Args:
-            deviceid (int, optional): Filter for messages originating from one device.
+            device_id (int, optional): Filter for messages originating from one device.
             limit (int, optional): Return a maximum of this many messages. Default is 25.
-            orgid (int, optional): Filter for messages from devices belonging to this organization.
-            topicname (str, optional): Filter for messages with a given topic.
-            timestampstart (int, optional): Only return messages received after this time (Unix timestamp).
-            timestampend (int, optional): Only return messages received before this time (Unix timestamp).
+            org_id (int, optional): Filter for messages from devices belonging to this organization.
+            topic_name (str, optional): Filter for messages with a given topic.
+            time_stamp_start (int, optional): Only return messages received after this time (Unix timestamp).
+            time_stamp_end (int, optional): Only return messages received before this time (Unix timestamp).
 
         Returns:
             dict: the json response as a dictionary.
@@ -52,12 +58,12 @@ class CSRMessaging(object):
         url = urljoin(self.client.base_url, 'csr/rdm')
         params = {
             'apikey': self.client.api_key,
-            'deviceid': deviceid,
+            'deviceid': device_id,
             'limit': limit,
-            'orgid': orgid,
-            'topicname': topicname,
-            'timestampstart': timestampstart,
-            'timestampend': timestampend
+            'orgid': org_id,
+            'topicname': topic_name,
+            'timestampstart': time_stamp_start,
+            'timestampend': time_stamp_end
         }
         resp = requests.get(url, json=params)
         return resp.json()
@@ -70,15 +76,15 @@ class SMSMessaging(object):
         """Save a reference to the client."""
         self.client = client
 
-    def send_message(self, deviceid, body, fromnumber=None):
+    def send_message(self, device_id, body, from_number=None):
         """Send SMS Message.
 
         There is no cost to send SMS messages to Hologram devices via API.
 
         Args:
-            deviceid (int): ID of the device to send to.
+            device_id (int): ID of the device to send to.
             body (str): ASCII Text representation of the SMS body.
-            fromnumber (str, optional): Phone number to display as the sender.
+            from_number (str, optional): Phone number to display as the sender.
 
         Returns:
             dict: the json response as a dictionary.
@@ -86,9 +92,9 @@ class SMSMessaging(object):
         url = urljoin(self.client.base_url, 'sms/incoming')
         params = {
             'apikey': self.client.api_key,
-            'deviceid': deviceid,
+            'deviceid': device_id,
             'body': body,
-            'fromnumber': fromnumber
+            'fromnumber': from_number
         }
         resp = requests.post(url, json=params)
         return resp.json()
@@ -104,7 +110,7 @@ class CloudToDeviceMessaging(object):
         """Save a reference to the client."""
         self.client = client
 
-    def send_message(self, deviceids, protocol, port, data=None, base64data=None):
+    def send_message(self, device_ids, protocol, port, data=None, base64_data=None):
         """Send a Message to a List of Devices.
 
         Args:
@@ -112,43 +118,47 @@ class CloudToDeviceMessaging(object):
             protocol (str): The protocol to use: 'TCP' or 'UDP'.
             port (int): The port to use.
             data (str): The data to send. Max length of 10k bytes. Must send either data or base64data.
-            base64data (str): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
+            base64_data (str): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        if (data is None and base64data is None) or (data is not None and base64data is not None):
-            raise ValueError('Please provide either `data` or `base64data`')
+        if (data is None and base64_data is None) or (data is not None and base64_data is not None):
+            raise ValueError('Please provide either `data` or `base64_data`')
         url = urljoin(self.client.base_url, 'devices/messages')
         params = {
             'apikey': self.client.api_key,
-            'deviceids': deviceids,
+            'deviceids': device_ids,
             'protocol': protocol,
             'port': port,
             'data': data,
-            'base64data': base64data
+            'base64data': base64_data
         }
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def trigger_webhook(self, deviceid, webhookguid, data=None, base64data=None):
+    def trigger_webhook(self, device_id, webhook_guid, data=None, base64_data=None):
         """Send Message to a Device via Webhook.
 
+        This endpoint does not require authentication with your API key, as the
+        webhook GUID serves as an authentication token. In order to generate a
+        webhook URL, please visit the cloud configuration page for your device.
+
         Args:
-            deviceid (int): ID of the device to send to.
-            webhookguid (str): generated UUID for the webhook URL.
+            device_id (int): ID of the device to send to.
+            webhook_guid (str): generated UUID for the webhook URL.
             data (str, optional): The data to send. Max length of 10k bytes. Must send either data or base64data.
-            base64data (str, optional): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
+            base64_data (str, optional): The data to send, encoded in base64. Max length of 10k bytes. Must send either data or base64data.
 
         Returns:
             int: Integer Code of responded HTTP Status, e.g. 404 or 200.
         """
-        if (data is None and base64data is None) or (data is not None and base64data is not None):
-            raise ValueError('Please provide either `data` or `base64data`')
-        url = urljoin(self.client.base_url, 'devices/messages/{}/{}'.format(deviceid, webhookguid))
+        if (data is None and base64_data is None) or (data is not None and base64_data is not None):
+            raise ValueError('Please provide either `data` or `base64_data`')
+        url = urljoin(self.client.base_url, 'devices/messages/{}/{}'.format(device_id, webhook_guid))
         params = {
             'data': data,
-            'base64data': base64data
+            'base64data': base64_data
         }
         resp = requests.post(url, json=params)
         return resp.status_code

@@ -33,16 +33,16 @@ class DataPlans(object):
         resp = requests.get(url, json=params)
         return resp.json()
 
-    def get(self, planid):
+    def get(self, plan_id):
         """Get a Data Plan.
 
         Args:
-            planid (int): The ID of the plan to get.
+            plan_id (int): The ID of the plan to get.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'plans/{}'.format(planid))
+        url = urljoin(self.client.base_url, 'plans/{}'.format(plan_id))
         params = {
             'apikey': self.client.api_key
         }

@@ -48,33 +48,33 @@ class DeviceTags(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def delete(self, tagid):
+    def delete(self, tag_id):
         """Delete a Device Tag.
 
         Args:
-            tagid (int): The ID of the tag to delete.
+            tag_id (int): The ID of the tag to delete.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'devices/tags/{}'.format(tagid))
+        url = urljoin(self.client.base_url, 'devices/tags/{}'.format(tag_id))
         params = {
             'apikey': self.client.api_key,
         }
         resp = requests.delete(url, json=params)
         return resp.json()
 
-    def link_devices(self, tagid, device_ids):
+    def link_devices(self, tag_id, device_ids):
         """Link a List of Devices to a Tag.
 
         Args:
-            tagid (int): The ID of the tag.
+            tag_id (int): The ID of the tag.
             device_ids (List[int]): List of device IDs to link to this tag.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'devices/tags/{}/link'.format(tagid))
+        url = urljoin(self.client.base_url, 'devices/tags/{}/link'.format(tag_id))
         params = {
             'apikey': self.client.api_key,
             'deviceids': device_ids
@@ -82,17 +82,17 @@ class DeviceTags(object):
         resp = requests.post(url, json=params)
         return resp.json()
 
-    def unlink_devices(self, tagid, device_ids):
+    def unlink_devices(self, tag_id, device_ids):
         """Unlink a List of Devices to a Tag.
 
         Args:
-            tagid (int): The ID of the tag.
+            tag_id (int): The ID of the tag.
             device_ids (List[int]): List of device IDs to unlink to this tag.
 
         Returns:
             dict: the json response as a dictionary.
         """
-        url = urljoin(self.client.base_url, 'devices/tags/{}/unlink'.format(tagid))
+        url = urljoin(self.client.base_url, 'devices/tags/{}/unlink'.format(tag_id))
         params = {
             'apikey': self.client.api_key,
             'deviceids': device_ids
