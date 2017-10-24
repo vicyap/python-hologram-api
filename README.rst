@@ -56,7 +56,7 @@ Example Usages::
     sims = ['99990000000012345678']
     plan = 73
     tier = 1
-    resp = self.client.cell.activate_sims(sims, plan, tier)
+    resp = client.cell.activate_sims(sims, plan, tier)
     assert resp.get('success') is not None
 
 The following submodules are available:
