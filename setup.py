@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='python_hologram_api',
-    version='0.1.2',
+    version='0.1.3',
     description="Python client for https://dashboard.hologram.io/api.",
     long_description=readme + '\n\n' + history,
     author="Victor Yap",
