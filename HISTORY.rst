@@ -2,6 +2,11 @@
 History
 =======
 
+0.1.4 (2017-10-23)
+------------------
+
+* Add ``python_hologram_api.rst`` to documentation
+
 0.1.3 (2017-10-23)
 ------------------
 
