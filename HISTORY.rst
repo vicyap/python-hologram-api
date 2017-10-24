@@ -6,3 +6,4 @@ History
 ------------------
 
 * First release on PyPI.
+* Implemented a Python wrapper for https://hologram.io/docs/reference/cloud/http/
