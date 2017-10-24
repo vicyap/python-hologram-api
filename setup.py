@@ -19,6 +19,7 @@ setup_requirements = [
 ]
 
 test_requirements = [
+    'flake8'
 ]
 
 setup(
