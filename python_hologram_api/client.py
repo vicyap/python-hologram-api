@@ -39,8 +39,10 @@ class HologramClient(object):
 
     @property
     def api_key(self):
+        """Return api_key."""
         return self._api_key
 
     @property
     def base_url(self):
+        """Return base_url."""
         return self._base_url

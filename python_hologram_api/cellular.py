@@ -25,7 +25,7 @@ class CellularLinks(object):
             sims (List[str]): array of SIM numbers to activate.
             plan (int): Device data plan. Look up plan IDs with List Data Plans.
             tier (int): Geographic zone. Currently the valid tiers are 1 and 2.
-                Higher tiers incur higher costs. See pricing for details.
+                    Higher tiers incur higher costs. See pricing for details.
 
         Returns:
             dict: the json response as a dictionary.
@@ -41,7 +41,7 @@ class CellularLinks(object):
         return resp.json()
 
     def list_links(self, org_id=None):
-        """List Cellular Links
+        """List Cellular Links.
 
         Args:
             org_id (int, optional): Only return results for the given organization ID.
