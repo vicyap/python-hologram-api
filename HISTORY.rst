@@ -2,6 +2,12 @@
 History
 =======
 
+0.1.6 (2017-10-27)
+------------------
+
+* Add coverage to travis
+* Add coveralls to travis and README
+
 0.1.5 (2017-10-27)
 ------------------
 
