@@ -31,8 +31,9 @@ Usage
 sub-categorized based on the endpoint that the method interfaces with. For
 example, user account management is under `client.user`.
 
-To use python-hologram-api in a project
-.. highlight:: python
+To use python-hologram-api in a project:
+
+.. code:: python
 
     import os
     from python_hologram_api.client import HologramClient
@@ -40,8 +41,9 @@ To use python-hologram-api in a project
     HOLOGRAM_API_KEY = os.environ.get('HOLOGRAM_API_KEY')
     client = HologramClient(HOLOGRAM_API_KEY)
 
-Example Usages
-.. highlight:: python
+Example Usages:
+
+.. code:: python
 
     # List Devices
     resp = client.devices.list()
