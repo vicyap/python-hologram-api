@@ -10,6 +10,9 @@ Python client for https://dashboard.hologram.io/api.
 .. image:: https://img.shields.io/travis/vicyap/python-hologram-api.svg
         :target: https://travis-ci.org/vicyap/python-hologram-api
 
+.. image:: https://coveralls.io/repos/github/vicyap/python-hologram-api/badge.svg?branch=master
+		:target: https://coveralls.io/github/vicyap/python-hologram-api?branch=master
+
 .. image:: https://readthedocs.org/projects/python-hologram-api/badge/?version=latest
         :target: https://python-hologram-api.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
