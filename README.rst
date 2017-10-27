@@ -25,7 +25,8 @@ Installation
 Documentation
 -------------
 
-* Documentation: https://python-hologram-api.readthedocs.io.
+* Python API: https://python-hologram-api.readthedocs.io.
+* HTTP API: https://hologram.io/docs/reference/cloud/http/
 
 Usage
 -----
