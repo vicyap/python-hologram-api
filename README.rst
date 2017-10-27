@@ -17,7 +17,7 @@ Python client for https://dashboard.hologram.io/api.
 Installation
 ------------
 
-``pip install python_hologram_api``
+``pip install python-hologram-api``
 
 Documentation
 -------------
@@ -31,7 +31,8 @@ Usage
 sub-categorized based on the endpoint that the method interfaces with. For
 example, user account management is under `client.user`.
 
-To use python-hologram-api in a project::
+To use python-hologram-api in a project
+.. highlight:: python
 
     import os
     from python_hologram_api.client import HologramClient
@@ -39,7 +40,8 @@ To use python-hologram-api in a project::
     HOLOGRAM_API_KEY = os.environ.get('HOLOGRAM_API_KEY')
     client = HologramClient(HOLOGRAM_API_KEY)
 
-Example Usages::
+Example Usages
+.. highlight:: python
 
     # List Devices
     resp = client.devices.list()
@@ -84,4 +86,3 @@ License
 -------
 
 * Free software: MIT license
-
